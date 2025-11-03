@@ -25,7 +25,7 @@ const BookList = () => {
       <h2 className="mb-4 text-center">Catálogo de Libros</h2>
 
       {loading ? (
-        // 🔹 mientras carga mostramos un spinner
+
         <div className="text-center mt-5">
           <Spinner animation="border" role="status" variant="primary">
             <span className="visually-hidden">Cargando...</span>
@@ -33,7 +33,7 @@ const BookList = () => {
           <p className="mt-3">Cargando libros...</p>
         </div>
       ) : books.length > 0 ? (
-        // 🔹 cuando ya hay libros
+
         <Row>
           {books.map((book) => (
             <Col key={book._id} md={4} className="mb-4">

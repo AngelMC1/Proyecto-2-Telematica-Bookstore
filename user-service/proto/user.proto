@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 
 service UserService {
-  // Obtener usuario por id
+
   rpc GetUserById (UserRequest) returns (UserResponse);
 }
 

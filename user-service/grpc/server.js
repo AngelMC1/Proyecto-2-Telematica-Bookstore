@@ -4,7 +4,7 @@ import protoLoader from "@grpc/proto-loader";
 import path from "path";
 import { fileURLToPath } from "url";
 import connectDB from "../config/db.js";
-import User from "../models/userModel.js"; // ruta según tu proyecto
+import User from "../models/userModel.js"; 
 import dotenv from "dotenv";
 
 dotenv.config();
