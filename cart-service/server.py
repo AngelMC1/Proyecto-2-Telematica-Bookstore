@@ -45,7 +45,7 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    port = int(os.getenv('PORT', 5003))
+    port = int(os.getenv('PORT', 5004))
     
     print(f"🚀 Cart Service starting on port {port}")
     app.run(host='0.0.0.0', port=port)

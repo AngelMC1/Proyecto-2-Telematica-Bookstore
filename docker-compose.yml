@@ -57,9 +57,9 @@ services:
     container_name: cart-service
     restart: always
     ports:
-      - "5003:5003"
+      - "5004:5004"
     environment:
-      - PORT=5003
+      - PORT=5004
       - MONGO_URI=${MONGO_URI}
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
@@ -76,6 +76,22 @@ services:
     networks:
       - bookstore-network
 
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    restart: always
+    ports:
+      - "5003:5003"
+    environment:
+      - PORT=5003
+      - MONGO_URI=${MONGO_URI}
+      - RABBITMQ_URL=amqp://rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - bookstore-network
+
   frontend:
     build: ./frontend
     container_name: bookstore-frontend
@@ -85,6 +101,8 @@ services:
       user-service:
         condition: service_started
       catalog-service:
+        condition: service_started
+      notification-service:
         condition: service_started
     networks:
       - bookstore-network

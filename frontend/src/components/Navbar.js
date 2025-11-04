@@ -48,6 +48,9 @@ const NavigationBar = () => {
             ) : (
               <>
                 <Nav.Link href="/cart">🛒 Carrito</Nav.Link>
+                <LinkContainer to="/notifications">
+                  <Nav.Link>🔔 Notificaciones</Nav.Link>
+                </LinkContainer>
                 <NavDropdown title={` Hola, ${user.name}`} id="user-menu" align="end">
                   <NavDropdown.Item onClick={handleLogout}>
                     Cerrar sesión
