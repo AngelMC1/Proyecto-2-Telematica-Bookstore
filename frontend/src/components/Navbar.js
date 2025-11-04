@@ -46,11 +46,16 @@ const NavigationBar = () => {
                 </LinkContainer>
               </>
             ) : (
-              <NavDropdown title={` Hola, ${user.name}`} id="user-menu" align="end">
-                <NavDropdown.Item onClick={handleLogout}>
-                  Cerrar sesión
-                </NavDropdown.Item>
-              </NavDropdown>
+              <>
+                <LinkContainer to="/notifications">
+                  <Nav.Link>Notifications</Nav.Link>
+                </LinkContainer>
+                <NavDropdown title={` Hola, ${user.name}`} id="user-menu" align="end">
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Cerrar sesión
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>
