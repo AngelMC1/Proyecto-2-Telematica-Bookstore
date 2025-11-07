@@ -9,7 +9,7 @@ const BookList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/books")
+      .get("http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5001/api/books")
       .then((response) => {
         setBooks(response.data);
         setLoading(false); 

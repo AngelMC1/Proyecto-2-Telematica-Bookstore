@@ -11,7 +11,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/books/${id}`)
+      .get(`http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5001/api/books/${id}`)
       .then((res) => setBook(res.data))
       .catch((err) => console.error("Error al obtener el libro:", err));
   }, [id]);

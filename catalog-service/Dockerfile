@@ -12,4 +12,4 @@ EXPOSE 5001 50052
 
 ENV NODE_ENV=production
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "chmod +x node_modules/.bin/concurrently && npm start"]

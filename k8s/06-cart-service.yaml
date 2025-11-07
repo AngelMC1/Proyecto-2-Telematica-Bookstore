@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-service
+  namespace: bookstore
+  labels:
+    app: cart-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cart-service
+  template:
+    metadata:
+      labels:
+        app: cart-service
+    spec:
+      containers:
+      - name: cart-service
+        image: 590184067968.dkr.ecr.us-east-1.amazonaws.com/cart-service:latest  # Reemplazar con tu ECR registry
+        ports:
+        - containerPort: 5004
+        env:
+        - name: PORT
+          value: "5004"
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: bookstore-secrets
+              key: MONGO_URI
+        - name: RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: bookstore-config
+              key: RABBITMQ_HOST
+        - name: RABBITMQ_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: bookstore-config
+              key: RABBITMQ_PORT
+        - name: CATALOG_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: bookstore-config
+              key: CATALOG_SERVICE_URL
+        - name: USER_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: bookstore-config
+              key: USER_SERVICE_URL
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: bookstore-config
+              key: NODE_ENV
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5004
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5004
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+      initContainers:
+      - name: wait-for-dependencies
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -z rabbitmq-service 5672 && nc -z catalog-service 5001 && nc -z user-service 5002; do echo waiting for dependencies; sleep 2; done;']
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service
+  namespace: bookstore
+spec:
+  selector:
+    app: cart-service
+  ports:
+  - port: 5004
+    targetPort: 5004
+  type: ClusterIP

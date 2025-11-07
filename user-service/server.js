@@ -19,6 +19,13 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoutes);
 
+const emptyResponse = async (req, res) => {
+  res.json({});
+};
+
+app.get("/health", emptyResponse);
+app.get("/ready", emptyResponse);
+
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => console.log(`User Service running on port ${PORT}`));
 await connectRabbitMQ();

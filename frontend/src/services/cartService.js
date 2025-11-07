@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5004/api/cart';
+const API_URL = 'http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5004/api/cart';
 
 export const cartService = {
   getCart: (userId) => axios.get(`${API_URL}/${userId}`),

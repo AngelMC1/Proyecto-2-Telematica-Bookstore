@@ -4,7 +4,7 @@ const queueName = "user_events";
 
 export const consumeUserEvents = async () => {
   try {
-    const connection = await amqp.connect("amqp://rabbitmq");
+    const connection = await amqp.connect(process.env.RABBITMQ_URL);
     const channel = await connection.createChannel();
 
     await channel.assertQueue(queueName, { durable: true });

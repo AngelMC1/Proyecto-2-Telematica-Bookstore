@@ -29,6 +29,13 @@ app.get("/api/catalog/user/:id", (req, res) => {
 
 app.use("/api/books", bookRoutes);
 
+const emptyResponse = async (req, res) => {
+  res.json({});
+};
+
+app.get("/health", emptyResponse);
+app.get("/ready", emptyResponse);
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Catalog Service running on port ${PORT}`));
 await consumeUserEvents();

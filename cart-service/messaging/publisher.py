@@ -7,7 +7,7 @@ load_dotenv()
 
 def get_rabbitmq_connection():
     """Create RabbitMQ connection"""
-    host = os.getenv('RABBITMQ_HOST', 'rabbitmq')
+    host = os.getenv('RABBITMQ_URL', 'rabbitmq')
     port = int(os.getenv('RABBITMQ_PORT', 5672))
     
     try:

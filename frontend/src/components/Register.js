@@ -19,7 +19,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5002/api/users/register", form);
+      await axios.post("http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5002/api/users/register", form);
       alert("Usuario registrado correctamente");
       navigate("/login");
     } catch (error) {

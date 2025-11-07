@@ -5,7 +5,8 @@ const queueName = "user_events";
 
 export const connectRabbitMQ = async () => {
   try {
-    const connection = await amqp.connect("amqp://rabbitmq");
+    console.log("Va a conectarse!!!", process.env.RABBITMQ_URL);
+    const connection = await amqp.connect(process.env.RABBITMQ_URL);
     channel = await connection.createChannel();
     await channel.assertQueue(queueName, { durable: true });
     console.log("Connected to RabbitMQ and queue created:", queueName);

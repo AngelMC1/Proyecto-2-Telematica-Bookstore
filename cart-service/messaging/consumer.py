@@ -9,7 +9,7 @@ load_dotenv()
 class RabbitMQConsumer(threading.Thread):
     def __init__(self):
         super().__init__()
-        self.host = os.getenv('RABBITMQ_HOST', 'rabbitmq')
+        self.host = os.getenv('RABBITMQ_URL', 'rabbitmq')
         self.port = int(os.getenv('RABBITMQ_PORT', 5672))
         self.should_stop = False
         

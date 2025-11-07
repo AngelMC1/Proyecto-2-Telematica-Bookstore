@@ -41,6 +41,11 @@ def create_app():
         """Health check endpoint"""
         return {'status': 'healthy'}, 200
     
+    @app.route('/ready')
+    def ready_check():
+        """Ready check endpoint"""
+        return {'status': 'ready'}, 200
+
     return app
 
 if __name__ == '__main__':

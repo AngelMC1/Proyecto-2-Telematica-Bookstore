@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5002/api/users/login", form);
+      const res = await axios.post("http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5002/api/users/login", form);
       const user = res.data.user;
 
       localStorage.setItem("user", JSON.stringify(user));

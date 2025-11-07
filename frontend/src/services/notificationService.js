@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_NOTIFICATION_SERVICE_URL || 'http://localhost:5003';
+const API_URL = process.env.REACT_APP_NOTIFICATION_SERVICE_URL || 'http://bookstore-alb-192888883.us-east-1.elb.amazonaws.com:5003';
 
 export const notificationService = {
     // Send a direct notification to a specific user

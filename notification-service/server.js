@@ -27,6 +27,13 @@ app.get("/", (req, res) => {
 app.post("/api/notifications/direct", notificationController.sendDirectNotification);
 app.post("/api/notifications/broadcast", notificationController.sendBroadcastNotification);
 
+const emptyResponse = async (req, res) => {
+  res.json({});
+};
+
+app.get("/health", emptyResponse);
+app.get("/ready", emptyResponse);
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Error:", err);

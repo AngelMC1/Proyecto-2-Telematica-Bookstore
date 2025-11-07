@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 5003 50053
 
-CMD ["npm", "start", "dev"]
+CMD ["sh", "-c", "chmod +x node_modules/.bin/concurrently && npm start"]
